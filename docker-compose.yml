@@ -1,0 +1,28 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8000"
+    volumes:
+      - .:/workspace
+    env_file:
+      - ./app/.env
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1 # Pythonが.pycファイルを生成しないようにする。Dockerコンテナの中ではこのキャッシュは不要なので、作らないように設定
+      - PYTHONUNBUFFERED=1 # Pythonの出力をバッファリングしないようにする。docker compose logs -f でログをリアルタイム確認するときに、すぐ表示されるように設定
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: myapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+volumes:
+  db_data:
+    driver: local
+    
+

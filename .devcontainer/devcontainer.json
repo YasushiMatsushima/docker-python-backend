@@ -1,0 +1,21 @@
+{
+  "name": "docker-python-backend",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "api",
+  "workspaceFolder": "/workspace",
+  "runServices": ["api", "db"],
+  "postStartCommand": "git config --global --add safe.directory /workspace",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "anthropic.claude-code",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}
