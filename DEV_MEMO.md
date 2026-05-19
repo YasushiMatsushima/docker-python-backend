@@ -38,7 +38,7 @@ docker compose up --build -d
 
 ```bash
 # 作成
-python -m venv venv
+python -m venv .venv
 
 # 有効化（Linux/Mac）
 source venv/bin/activate
